@@ -19,13 +19,15 @@ export const TabFilter: React.FC<TabFilterProps> = ({
   onItemClick,
 }) => {
   return (
-    <View direction="row" role="list" shrink={0} justifyContent="center">
+    <View direction="row" role="tablist" shrink={0} justifyContent="center">
       {items.map((item) => (
         <Block key={item.id}>
           <TabNavItem
             isActive={item.id === activeItemId}
             value={item.value}
             onClick={onItemClick}
+            role="tab"
+            name={`Filter by bodytype ${item.text}`}
           >
             {item.text}
           </TabNavItem>

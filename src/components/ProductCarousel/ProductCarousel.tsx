@@ -49,7 +49,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ cars }) => {
     }
   });
 
-  // Reset carousel on change of items
+  // Yikes, manually reset carousel on change of items
   // Should have used a different carousel lib...
   useEffect(() => {
     slideToItem(cars[0].id);
@@ -68,7 +68,11 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ cars }) => {
         extend={{ fromL: { display: 'none' } }}
       >
         {cars.map((car) => (
-          <Click key={car.id} onClick={() => slideToItem(car.id)}>
+          <Click
+            key={car.id}
+            onClick={() => slideToItem(car.id)}
+            title={car.modelName}
+          >
             <Block
               style={{
                 width: 8,
