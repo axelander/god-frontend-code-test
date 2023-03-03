@@ -1,11 +1,17 @@
-import { HelloWorld } from "../src/components/HelloWorld";
-import "../public/css/styles.css";
-import React from "react";
+import { StyleProvider, ThemePicker } from 'vcc-ui';
+import '../public/css/styles.css';
+import React, { useState } from 'react';
+import { AppProps } from 'next/app';
 
-function HomePage() {
+function HomePage({ Component, pageProps }: AppProps) {
+  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'>('light');
   return (
     <React.StrictMode>
-      <HelloWorld />
+      <StyleProvider>
+        <ThemePicker variant={selectedTheme}>
+          <Component {...pageProps} />
+        </ThemePicker>
+      </StyleProvider>
     </React.StrictMode>
   );
 }
