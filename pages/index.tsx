@@ -12,6 +12,8 @@ function Home() {
       .then((data) => setCars(data));
   }, []);
 
+  if (!cars.length) return null;
+
   return (
     <Grid>
       <Row>
