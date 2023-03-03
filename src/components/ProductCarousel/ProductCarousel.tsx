@@ -4,7 +4,7 @@ import { ProductCarouselItem } from './ProductCarouselItem';
 import { useSpringCarousel } from 'react-spring-carousel';
 import { ProductCarouselNavButton } from './ProductCarouselNavButton';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 interface ProductCarouselProps {
   cars: Car[];
@@ -18,7 +18,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ cars }) => {
 
   const itemsPerSlide = useMemo(() => {
     if (isLargeScreen) return 4;
-    if (isMediumScreen) return 3;
+    if (isMediumScreen) return 2.5;
     return 1.5;
   }, [isLargeScreen, isMediumScreen]);
 
@@ -31,6 +31,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ cars }) => {
   } = useSpringCarousel({
     gutter: 20,
     itemsPerSlide: itemsPerSlide,
+    slideWhenThresholdIsReached: false,
     items: cars.map((car) => ({
       id: car.id,
       renderItem: <ProductCarouselItem key={car.id} car={car} />,
@@ -47,6 +48,13 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ cars }) => {
       setCurrentSlide(event.nextItem);
     }
   });
+
+  // Reset carousel on change of items
+  // Should have used a different carousel lib...
+  useEffect(() => {
+    slideToItem(cars[0].id);
+    setCurrentSlide({ id: cars[0].id, index: 0 });
+  }, [cars.map((car) => car.id).join('-')]);
 
   return (
     <View paddingTop={10}>

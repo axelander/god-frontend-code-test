@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import { Block, Link, Spacer, Text, useTheme, View } from 'vcc-ui';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { Block, Link, Text, useTheme, View } from 'vcc-ui';
 import { Car } from '../../types';
 
 export const ProductCarouselItem: React.FC<{ car: Car }> = ({ car }) => {

@@ -1,11 +1,6 @@
-export enum BodyType {
-  'suv',
-}
+export type BodyType = 'suv' | 'estate' | 'sedan';
 
-export enum ModelType {
-  PLUGIN_HYBRID = 'plug-in hybrid',
-  PURE_ELECTRIC = 'pure electric',
-}
+export type ModelType = 'plug-in hybrid' | 'pure electric';
 
 export type Car = {
   id: string;
