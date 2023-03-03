@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Col, Grid, Row } from 'vcc-ui';
 import { ProductCarousel } from '../src/components/ProductCarousel';
 import { Car } from '../src/types';
 
@@ -11,7 +12,15 @@ function Home() {
       .then((data) => setCars(data));
   }, []);
 
-  return <ProductCarousel cars={cars} />;
+  return (
+    <Grid>
+      <Row>
+        <Col size={12}>
+          <ProductCarousel cars={cars} />
+        </Col>
+      </Row>
+    </Grid>
+  );
 }
 
 export default Home;

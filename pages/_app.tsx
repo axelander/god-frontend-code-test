@@ -1,14 +1,13 @@
 import { StyleProvider, ThemePicker } from 'vcc-ui';
 import '../public/css/styles.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { AppProps } from 'next/app';
 
 function HomePage({ Component, pageProps }: AppProps) {
-  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'>('light');
   return (
     <React.StrictMode>
       <StyleProvider>
-        <ThemePicker variant={selectedTheme}>
+        <ThemePicker variant={'light'}>
           <Component {...pageProps} />
         </ThemePicker>
       </StyleProvider>
