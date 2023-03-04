@@ -1,34 +1,37 @@
-import { useEffect, useState } from 'react';
-import { Col, Grid, Row, View } from 'vcc-ui';
+import { useState } from 'react';
+import { Block, Col, Grid, LoadingBar, Row, Text, View } from 'vcc-ui';
 import { ProductCarousel } from '../src/components/ProductCarousel';
 import { TabFilter } from '../src/components/TabFilter';
-import { Car } from '../src/types';
+import { useGetCars } from '../src/hooks/useGetCars';
 import { groupCarsByBodyType } from '../src/utils';
 
 function Home() {
-  const [cars, setCars] = useState<Car[]>([]);
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
+  const { cars, loading, error } = useGetCars();
 
-  useEffect(() => {
-    fetch('/api/cars.json')
-      .then((res) => res.json())
-      .then((data) => setCars(data));
-  }, []);
+  if (loading)
+    return (
+      <Block extend={{ position: 'fixed', top: 0, left: 0, width: '100%' }}>
+        <LoadingBar isLoading={loading} />
+      </Block>
+    );
 
-  if (!cars.length) return null;
+  if (error) {
+    return <Text>Failed to fetch cars :(</Text>;
+  }
+
+  if (!cars) return <Text>No cars</Text>;
 
   const groupedByBodyType = groupCarsByBodyType(cars);
   const filterItems = [
-    { id: 'all', text: `All (${cars.length})`, value: 'all' },
+    { id: 'all', text: `All (${cars.length})` },
+    { id: 'suv', text: `SUV (${groupedByBodyType['suv'].length})` },
+    {
+      id: 'estate',
+      text: `Estate (${groupedByBodyType['estate'].length})`,
+    },
+    { id: 'sedan', text: `Sedan (${groupedByBodyType['sedan'].length})` },
   ];
-
-  filterItems.push(
-    ...Object.values(groupedByBodyType).map((group) => ({
-      id: group[0].bodyType,
-      text: `${group[0].bodyType} (${group.length})`,
-      value: group[0].bodyType,
-    }))
-  );
 
   const filteredCars =
     selectedFilter === 'all'

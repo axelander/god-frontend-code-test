@@ -1,9 +1,7 @@
-import { MouseEventHandler } from 'react';
 import { Block, TabNavItem, View } from 'vcc-ui';
 
 type TabFilterItem = {
   text: string;
-  value: string;
   id: string;
 };
 
@@ -24,7 +22,7 @@ export const TabFilter: React.FC<TabFilterProps> = ({
         <Block key={item.id}>
           <TabNavItem
             isActive={item.id === activeItemId}
-            value={item.value}
+            value={item.id}
             // @ts-ignore: target.value is present here, is the onClick handler on TabNavItem typed correctly?
             onClick={(e) => onItemClick(e.target.value)}
             role="tab"

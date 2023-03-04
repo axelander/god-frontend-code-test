@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Block, Link, Text, useTheme, View } from 'vcc-ui';
-import { Car } from '../../types';
+import { Car } from '../types';
 
 export const ProductCarouselItem: React.FC<{ car: Car }> = ({ car }) => {
   const theme = useTheme();
