@@ -18,12 +18,17 @@ function Home() {
   if (!cars.length) return null;
 
   const groupedByBodyType = groupCarsByBodyType(cars);
+  const filterItems = [
+    { id: 'all', text: `All (${cars.length})`, value: 'all' },
+  ];
 
-  const filterItems = Object.values(groupedByBodyType).map((group) => ({
-    id: group[0].bodyType,
-    text: `${group[0].bodyType} (${group.length})`,
-    value: group[0].bodyType,
-  }));
+  filterItems.push(
+    ...Object.values(groupedByBodyType).map((group) => ({
+      id: group[0].bodyType,
+      text: `${group[0].bodyType} (${group.length})`,
+      value: group[0].bodyType,
+    }))
+  );
 
   const filteredCars =
     selectedFilter === 'all'
@@ -36,10 +41,7 @@ function Home() {
         <Col size={12}>
           <View paddingTop={10}>
             <TabFilter
-              items={[
-                { id: 'all', text: `All (${cars.length})`, value: 'all' },
-                ...filterItems,
-              ]}
+              items={filterItems}
               activeItemId={selectedFilter}
               onItemClick={(e) => setSelectedFilter(e.target.value)}
             />

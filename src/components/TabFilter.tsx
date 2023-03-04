@@ -19,7 +19,7 @@ export const TabFilter: React.FC<TabFilterProps> = ({
   onItemClick,
 }) => {
   return (
-    <View direction="row" role="tablist" shrink={0} justifyContent="center">
+    <View direction="row" role="tablist" justifyContent="center" wrap="wrap">
       {items.map((item) => (
         <Block key={item.id}>
           <TabNavItem
