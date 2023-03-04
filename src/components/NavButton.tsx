@@ -1,15 +1,17 @@
 import Image from 'next/image';
 import { Click } from 'vcc-ui';
 
-interface ProductCarouselNavButtonProps {
+interface NavButtonProps {
   onClick: () => void;
   alt: string;
   direction: 'left' | 'right';
 }
 
-export const ProductCarouselNavButton: React.FC<
-  ProductCarouselNavButtonProps
-> = ({ onClick, alt, direction }) => {
+export const NavButton: React.FC<NavButtonProps> = ({
+  onClick,
+  alt,
+  direction,
+}) => {
   return (
     <Click onClick={onClick}>
       <Image

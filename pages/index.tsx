@@ -43,7 +43,7 @@ function Home() {
             <TabFilter
               items={filterItems}
               activeItemId={selectedFilter}
-              onItemClick={(e) => setSelectedFilter(e.target.value)}
+              onItemClick={(value) => setSelectedFilter(value)}
             />
           </View>
         </Col>

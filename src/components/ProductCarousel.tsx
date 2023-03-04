@@ -1,9 +1,9 @@
 import { Block, Click, Spacer, useTheme, View } from 'vcc-ui';
-import { Car } from '../../types';
+import { Car } from '../types';
 import { ProductCarouselItem } from './ProductCarouselItem';
 import { useSpringCarousel } from 'react-spring-carousel';
-import { ProductCarouselNavButton } from './ProductCarouselNavButton';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { NavButton } from './NavButton';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import { useEffect, useMemo, useState } from 'react';
 
 interface ProductCarouselProps {
@@ -94,13 +94,13 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ cars }) => {
         justifyContent="flex-end"
         extend={{ untilL: { display: 'none' } }}
       >
-        <ProductCarouselNavButton
+        <NavButton
           direction="left"
           onClick={slideToPrevItem}
           alt="Go to previous slide"
         />
         <Spacer />
-        <ProductCarouselNavButton
+        <NavButton
           direction="right"
           onClick={slideToNextItem}
           alt="Go to next slide"

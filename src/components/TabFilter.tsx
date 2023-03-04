@@ -10,7 +10,7 @@ type TabFilterItem = {
 interface TabFilterProps {
   items: TabFilterItem[];
   activeItemId: string;
-  onItemClick: MouseEventHandler<HTMLButtonElement>;
+  onItemClick: (value: string) => void;
 }
 
 export const TabFilter: React.FC<TabFilterProps> = ({
@@ -25,7 +25,8 @@ export const TabFilter: React.FC<TabFilterProps> = ({
           <TabNavItem
             isActive={item.id === activeItemId}
             value={item.value}
-            onClick={onItemClick}
+            // @ts-ignore: target.value is present here, is the onClick handler on TabNavItem typed correctly?
+            onClick={(e) => onItemClick(e.target.value)}
             role="tab"
             name={`Filter by bodytype ${item.text}`}
           >
